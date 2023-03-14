@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private enum MovementState { idle, running, jumping, falling }
 
+    public static bool gameIsPaused;
 
     // Start is called before the first frame update
     private void Start()
@@ -30,13 +31,32 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(Time.timeScale == 1) {
+            float dirX = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
 
-        float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+            if (Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 14f);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            //gameIsPaused = !gameIsPaused;
+            PauseGame();
+        }
+    }
+    //pauses game
+    public void PauseGame ()
+    {
+        if(Time.timeScale == 1)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 14f);
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+        }
+        else 
+        {
+            Time.timeScale = 1;
+            AudioListener.pause = false;
         }
     }
 

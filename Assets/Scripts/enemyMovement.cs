@@ -14,7 +14,7 @@ public class enemyMovement : MonoBehaviour
     [Header("Movement Parameters")]
     [SerializeField] private float speed;
     private Vector3 initScale;
-    private bool movingLeft;
+    private bool movingLeft = true;
 
     public void Awake()
     {

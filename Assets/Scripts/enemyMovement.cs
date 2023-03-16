@@ -19,6 +19,7 @@ public class enemyMovement : MonoBehaviour
     public int health = 100;
     public GameObject deathEffect;
     private Animator anim;
+    private BoxCollider2D coll;
 
     private void Start()
     {
@@ -34,8 +35,10 @@ public class enemyMovement : MonoBehaviour
     }
 
     IEnumerator Die() {
+        coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         anim.SetTrigger("death");
+        coll.enabled = !coll.enabled;
         yield return new WaitForSeconds(0.5f);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);

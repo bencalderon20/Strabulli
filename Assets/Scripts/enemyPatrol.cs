@@ -14,6 +14,9 @@ public class enemyPatrol : MonoBehaviour
 
     [SerializeField] private float speed;
 
+    [SerializeField] private  int health = 100;
+    [SerializeField] private GameObject deathEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,24 @@ public class enemyPatrol : MonoBehaviour
         anim = GetComponent<Animator>();
         currentPoint = rightEdge.transform;
         anim.SetBool("moving", true);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            StartCoroutine(Die());
+        }
+    }
+
+    IEnumerator Die()
+    {
+        anim = GetComponent<Animator>();
+        anim.SetTrigger("death");
+        yield return new WaitForSeconds(0.5f);
+        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

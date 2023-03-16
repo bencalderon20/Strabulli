@@ -20,6 +20,12 @@ public class enemyMovement : MonoBehaviour
     public GameObject deathEffect;
     private Animator anim;
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        anim.SetBool("moving", true);
+    }
+
     public void TakeDamage(int damage) {
         health -= damage;
         if (health <= 0) {
@@ -54,6 +60,7 @@ public class enemyMovement : MonoBehaviour
         {
             if (enemy.position.x >= leftEdge.position.x)
             {
+                
                 MoveInDirection(-1);
             }else
             {

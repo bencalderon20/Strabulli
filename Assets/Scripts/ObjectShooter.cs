@@ -23,7 +23,7 @@ public class ObjectShooter : MonoBehaviour
       }
     }
     void ShootLaser() {
-        Laser.position = new Vector3(enemy.position.x + Time.deltaTime * direction * speed, enemy.position.y, enemy.position.z);
+        //Laser.position = new Vector3(enemy.position.x + Time.deltaTime * direction * speed, enemy.position.y, enemy.position.z);
         rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
     }
 }

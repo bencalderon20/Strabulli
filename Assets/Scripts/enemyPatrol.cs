@@ -11,6 +11,7 @@ public class enemyPatrol : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Transform currentPoint;
+    private BoxCollider2D coll;
 
     [SerializeField] private float speed;
 
@@ -22,6 +23,7 @@ public class enemyPatrol : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        coll = GetComponent<BoxCollider2D>();
         currentPoint = rightEdge.transform;
         anim.SetBool("moving", true);
     }
@@ -37,8 +39,9 @@ public class enemyPatrol : MonoBehaviour
 
     IEnumerator Die()
     {
-        anim = GetComponent<Animator>();
+        
         anim.SetTrigger("death");
+        coll.enabled = !coll.enabled;
         yield return new WaitForSeconds(0.5f);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);

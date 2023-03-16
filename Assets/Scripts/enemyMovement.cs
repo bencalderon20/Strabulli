@@ -16,6 +16,25 @@ public class enemyMovement : MonoBehaviour
     private Vector3 initScale;
     private bool movingLeft = true;
 
+    public int health = 100;
+    public GameObject deathEffect;
+    private Animator anim;
+
+    public void TakeDamage(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            StartCoroutine(Die());
+        }
+    }
+
+    IEnumerator Die() {
+        anim = GetComponent<Animator>();
+        anim.SetTrigger("death");
+        yield return new WaitForSeconds(0.5f);
+        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
     public void Awake()
     {
         initScale = enemy.localScale;

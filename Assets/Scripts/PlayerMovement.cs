@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState { idle, walking, jumping, falling }
 
     public static bool gameIsPaused;
+    private bool dirRight = true;
 
     // Start is called before the first frame update
     private void Start()
@@ -38,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+        if(rb.position.x > 225){
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
 
         UpdateAnimationState();
     }
@@ -66,11 +71,22 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.walking;
             sprite.flipX = false;
+            if (dirRight == false) {
+                transform.Rotate(0f, 180f, 0f);
+                dirRight = true;
+            }
+
+            
         }
         else if (dirX < 0f)
         {
             state = MovementState.walking;
-            sprite.flipX = true;
+            //sprite.flipX = true;
+            if (dirRight == true) {
+                transform.Rotate(0f, 180f, 0f);
+                dirRight = false;
+            }
+
         }
         else
         {

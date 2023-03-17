@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -12,29 +11,31 @@ public class PauseMenu : MonoBehaviour
 
     public void activate_pausemenu()
     {
-          
-            panel.SetActive(true);            
-        
+        panel.SetActive(true);            
     }
     public void disable_pausemenu()
     {
-          
-            panel.SetActive(false);            
-        
+        panel.SetActive(false);              
     }  
     public void Start() {
         panel.SetActive(false);
+    }
+
+    public void Restart() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+        AudioListener.pause = false;
     }
     
     public void Update()
     {
       if(Time.timeScale == 0f) //game_pasused
       {
-       activate_pausemenu();
+        activate_pausemenu();
       }
       if(Time.timeScale == 1) //game_pasused
       {
-       disable_pausemenu();
+        disable_pausemenu();
       }
     } 
 

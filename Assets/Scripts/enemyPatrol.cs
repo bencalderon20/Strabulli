@@ -22,10 +22,10 @@ public class enemyPatrol : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
         currentPoint = rightEdge.transform;
-        anim.SetBool("moving", true);
+        //anim.SetBool("moving", true);
     }
 
     public void TakeDamage(int damage)
@@ -38,8 +38,7 @@ public class enemyPatrol : MonoBehaviour
     }
 
     IEnumerator Die()
-    {
-        
+    {    
         anim.SetTrigger("death");
         coll.enabled = !coll.enabled;
         yield return new WaitForSeconds(0.5f);

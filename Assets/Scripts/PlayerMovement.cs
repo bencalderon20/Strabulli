@@ -40,9 +40,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-        if(rb.position.x > 225){
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
+        //if(rb.position.x > 225){
+        //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //    }
 
         UpdateAnimationState();
     }

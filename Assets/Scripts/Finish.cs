@@ -19,11 +19,11 @@ public class Finish : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             finishSound.Play();
-
+            CompleteLevel();
         }
     }
 
-    private void CompleteLeve()
+    private void CompleteLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

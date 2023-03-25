@@ -91329,6 +91329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirePoint: {fileID: 1494967090}
   Laser: {fileID: 2615604735533899386, guid: 93ef0ed43b774104cad8d07bcbe5016d, type: 3}
+  Spinach: {fileID: 2615604735533899386, guid: e3a835f5e966d5d4a9dc12a63b29dfc2, type: 3}
 --- !u!1 &1553100884
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public Transform FirePoint;
     public GameObject Laser;
+    public GameObject Spinach;
 
     // Update is called once per frame
     void Update()
@@ -14,10 +15,16 @@ public class Weapon : MonoBehaviour
 
          ShootLaser();
       }
+      if (Input.GetKeyDown(KeyCode.V)) {
+
+         SpinachPunch();
+      }
     }
 
     void ShootLaser() {
         Instantiate(Laser, FirePoint.position, FirePoint.rotation);
     }
-
+    void SpinachPunch() {
+        Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
+    }
 }

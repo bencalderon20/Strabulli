@@ -1017,6 +1017,8 @@ MonoBehaviour:
   rightEdge: {fileID: 1840378958}
   leftEdge: {fileID: 419320051}
   speed: 2
+  duration: 0.125
+  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
   health: 100
   deathEffect: {fileID: 0}
   jump: 0
@@ -1695,6 +1697,8 @@ MonoBehaviour:
   rightEdge: {fileID: 2031373374}
   leftEdge: {fileID: 485952009}
   speed: 2
+  duration: 0.125
+  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
   health: 100
   deathEffect: {fileID: 0}
   jump: 0
@@ -3483,7 +3487,7 @@ GameObject:
   - component: {fileID: 1026650180}
   - component: {fileID: 1026650182}
   - component: {fileID: 1026650181}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3507,7 +3511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.42, y: -2.06}
+  m_AnchoredPosition: {x: -19.42, y: -0.88}
   m_SizeDelta: {x: 23.9803, y: 5.4715}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1026650181
@@ -3557,14 +3561,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3593,7 +3597,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.117655754, w: 0}
+  m_margin: {x: 0, y: 0, z: 7.110594, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -90435,6 +90439,8 @@ MonoBehaviour:
   rightEdge: {fileID: 147924853}
   leftEdge: {fileID: 1450913908}
   speed: 2
+  duration: 0.125
+  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
   health: 100
   deathEffect: {fileID: 0}
   jump: 12
@@ -91179,7 +91185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472383015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 93, y: 9.3, z: 0}
+  m_LocalPosition: {x: 44.3, y: 1.4, z: 0}
   m_LocalScale: {x: 0.8136, y: 0.8136, z: 0.8136}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -101406,6 +101412,8 @@ MonoBehaviour:
   rightEdge: {fileID: 813909294}
   leftEdge: {fileID: 1915821603}
   speed: 2
+  duration: 0.125
+  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
   health: 100
   deathEffect: {fileID: 0}
   jump: 0

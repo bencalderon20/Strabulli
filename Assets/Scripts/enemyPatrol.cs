@@ -12,8 +12,13 @@ public class enemyPatrol : MonoBehaviour
     private Animator anim;
     private Transform currentPoint;
     private BoxCollider2D coll;
+    private SpriteRenderer spr;
+    private Material originalMaterial;
+    private Coroutine flashRoutine;
 
     [SerializeField] private float speed;
+    [SerializeField] private float duration;
+    [SerializeField] private Material flashMaterial;
 
     [SerializeField] private  int health = 100;
     [SerializeField] private GameObject deathEffect;
@@ -26,19 +31,49 @@ public class enemyPatrol : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
+        spr = GetComponent<SpriteRenderer>();
         currentPoint = rightEdge.transform;
         anim.SetBool("moving", true);
+        originalMaterial = spr.material;
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Resources.Load<Material>("FlashMaterial");
+
+        if (flashRoutine != null)
+        {
+            // In this case, we should stop it first.
+            // Multiple FlashRoutines the same time would cause bugs.
+            StopCoroutine(flashRoutine);
+        }
+
+        // Start the Coroutine, and store the reference for it.
+        flashRoutine = StartCoroutine(FlashRoutine());
+
         if (health <= 0)
         {
             //Debug.Log("Ded");
             StartCoroutine(Die());
         }
     }
+
+    private IEnumerator FlashRoutine()
+    {
+        // Swap to the flashMaterial.
+        spr.material = flashMaterial;
+
+        // Pause the execution of this function for "duration" seconds.
+        yield return new WaitForSeconds(duration);
+
+        // After the pause, swap back to the original material.
+        spr.material = originalMaterial;
+
+        // Set the routine to null, signaling that it's finished.
+        flashRoutine = null;
+    }
+
 
     IEnumerator Die()
     {    

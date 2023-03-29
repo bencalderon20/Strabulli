@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
 
+    [SerializeField] private AudioSource jumpSFX;
+    [SerializeField] private AudioSource moveSFX;
+
     private enum MovementState { idle, walking, jumping, falling }
 
     public static bool gameIsPaused;
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jumpSFX.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
         //if(rb.position.x > 225){
@@ -69,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         // Movement Animation Changing
         if (dirX > 0f)
         {
+            moveSFX.Play();
             state = MovementState.walking;
             sprite.flipX = false;
             if (dirRight == false) {
@@ -80,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (dirX < 0f)
         {
+            moveSFX.Play();
             state = MovementState.walking;
             //sprite.flipX = true;
             if (dirRight == true) {

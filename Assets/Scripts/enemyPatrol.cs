@@ -25,6 +25,8 @@ public class enemyPatrol : MonoBehaviour
     [SerializeField] private float jump = 7f;
     [SerializeField] private LayerMask jumpableGround;
 
+    [SerializeField] private AudioSource deathSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,7 @@ public class enemyPatrol : MonoBehaviour
     IEnumerator Die()
     {    
         //Debug.Log("Super Ded");
+        deathSFX.Play();
         anim.SetTrigger("death");
         coll.enabled = !coll.enabled;
         yield return new WaitForSeconds(0.5f);

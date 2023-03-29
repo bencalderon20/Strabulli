@@ -8,17 +8,20 @@ public class Weapon : MonoBehaviour
     public GameObject Laser;
     public GameObject Spinach;
 
+    [SerializeField] private AudioSource shootSFX;
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C)) {
 
-         ShootLaser();
-      }
-      if (Input.GetKeyDown(KeyCode.V)) {
+            shootSFX.Play();
+            ShootLaser();
+        }
+        if (Input.GetKeyDown(KeyCode.V)) {
 
-         SpinachPunch();
-      }
+            SpinachPunch();
+        }
     }
 
     void ShootLaser() {

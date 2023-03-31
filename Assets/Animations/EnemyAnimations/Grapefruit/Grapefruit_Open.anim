@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grapefruit_Attack
+  m_Name: Grapefruit_Open
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,6 +20,14 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
+      value: {fileID: 21300000, guid: 8466548483c658d4fb3cdaec707ef021, type: 3}
+    - time: 0.11666667
+      value: {fileID: 21300000, guid: 9826613facfc9da4eb2c2a153c0ce8a7, type: 3}
+    - time: 0.23333333
+      value: {fileID: 21300000, guid: bc05bd02cdd9eb34c9861d047130d284, type: 3}
+    - time: 0.35
+      value: {fileID: 21300000, guid: 6713db989b8ec614baf89560451977bb, type: 3}
+    - time: 0.46666667
       value: {fileID: 21300000, guid: 130124449ccee1d469e7e1ba8ffd6f23, type: 3}
     attribute: m_Sprite
     path: 
@@ -40,13 +48,17 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
+    - {fileID: 21300000, guid: 8466548483c658d4fb3cdaec707ef021, type: 3}
+    - {fileID: 21300000, guid: 9826613facfc9da4eb2c2a153c0ce8a7, type: 3}
+    - {fileID: 21300000, guid: bc05bd02cdd9eb34c9861d047130d284, type: 3}
+    - {fileID: 21300000, guid: 6713db989b8ec614baf89560451977bb, type: 3}
     - {fileID: 21300000, guid: 130124449ccee1d469e7e1ba8ffd6f23, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.48333332
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

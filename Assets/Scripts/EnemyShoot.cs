@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#include <stdlib.h>
 
 public class EnemyShoot : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class EnemyShoot : MonoBehaviour
     void Update()
     {
         float distance = Vector2.Distance(transform.position, player.transform.position);
-        if (abs(distance) < 5)
+        if (Math.Abs(distance) < 5)
         {
             anim.SetBool("Attack", true);
             timer += Time.deltaTime;

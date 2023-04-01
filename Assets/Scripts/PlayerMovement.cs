@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D coll;
     private SpriteRenderer sprite;
     private Animator anim;
+    private float timer = Mathf.Infinity;
+
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -17,15 +19,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 14f;
 
     [SerializeField] private AudioSource jumpSFX;
-    [SerializeField] private AudioSource moveSFX;
+    //[SerializeField] private AudioSource moveSFX;
 
     private enum MovementState { idle, walking, jumping, falling }
 
     public static bool gameIsPaused;
     private bool dirRight = true;
 
+    public Transform FirePoint;
+    public GameObject Laser;
+    public GameObject Spinach;
+    [SerializeField] private AudioSource shootSFX;
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
@@ -49,6 +55,34 @@ public class PlayerMovement : MonoBehaviour
         //    }
 
         UpdateAnimationState();
+        if (Input.GetKeyDown(KeyCode.C) && canAttack())
+        {
+            anim.SetBool("attack", true);
+            Attack();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+
+            SpinachPunch();
+        }
+        if(timer>10)
+            anim.SetBool("attack", false);
+        timer += Time.deltaTime;
+    }
+
+    private void ShootLaser()
+    {
+        Instantiate(Laser, FirePoint.position, FirePoint.rotation);
+    }
+    private void SpinachPunch()
+    {
+        Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
+    }
+    private void Attack()
+    {
+        timer = 0;
+        shootSFX.Play();
+        ShootLaser();
     }
 
     //pauses game
@@ -73,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         // Movement Animation Changing
         if (dirX > 0f)
         {
-            moveSFX.Play();
+            //moveSFX.Play();
             state = MovementState.walking;
             sprite.flipX = false;
             if (dirRight == false) {
@@ -85,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (dirX < 0f)
         {
-            moveSFX.Play();
+            //moveSFX.Play();
             state = MovementState.walking;
             //sprite.flipX = true;
             if (dirRight == true) {
@@ -120,4 +154,9 @@ public class PlayerMovement : MonoBehaviour
     {
        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
+    public bool canAttack()
+    {
+        return Input.GetKeyDown(KeyCode.C);
+    }
+    
 }

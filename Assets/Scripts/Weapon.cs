@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,23 +8,32 @@ public class Weapon : MonoBehaviour
     public GameObject Laser;
     public GameObject Spinach;
 
+    [SerializeField] private AudioSource shootSFX;
+    private void Awake()
+    {
+    }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C)) {
 
-         ShootLaser();
-      }
-      if (Input.GetKeyDown(KeyCode.V)) {
+            Attack();
+        }
+        if (Input.GetKeyDown(KeyCode.V)) {
 
-         SpinachPunch();
-      }
+            SpinachPunch();
+        }
     }
 
-    void ShootLaser() {
+    private void ShootLaser() {
         Instantiate(Laser, FirePoint.position, FirePoint.rotation);
     }
-    void SpinachPunch() {
+    private void SpinachPunch() {
         Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
     }
-}
+    private void Attack()
+    {
+        shootSFX.Play();
+        ShootLaser();
+    }
+}*/

@@ -6,6 +6,7 @@ public class ObjectShooter : MonoBehaviour
 {
     private Rigidbody2D rb;
     public GameObject Laser;
+    public GameObject Spinach;
     private float dirX = 0f;
     // Start is called before the first frame update
     void Start()
@@ -18,12 +19,19 @@ public class ObjectShooter : MonoBehaviour
     {
         float dirX = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown(KeyCode.C)) {
-         Instantiate(Laser);
-         ShootLaser();
+            Instantiate(Laser);
+            ShootLaser();
       }
+      if (Input.GetKeyDown(KeyCode.V)) {
+            //Instantiate(Spinach);
+            SpinachPunch();
+        }
     }
     void ShootLaser() {
         //Laser.position = new Vector3(enemy.position.x + Time.deltaTime * direction * speed, enemy.position.y, enemy.position.z);
         rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
+    }
+    private void SpinachPunch() {
+        //Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
     }
 }

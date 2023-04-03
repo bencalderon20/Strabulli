@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
     private float timer = Mathf.Infinity;
+    private float timer2 = Mathf.Infinity;
 
 
     [SerializeField] private LayerMask jumpableGround;
 
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float jumpForce = 14f;
 
     [SerializeField] private AudioSource jumpSFX;
@@ -65,9 +67,11 @@ public class PlayerMovement : MonoBehaviour
 
             SpinachPunch();
         }
-        if(timer>10)
+        if(timer>10) {
             anim.SetBool("attack", false);
+        }
         timer += Time.deltaTime;
+        timer2 += Time.deltaTime;
     }
 
     private void ShootLaser()
@@ -76,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void SpinachPunch()
     {
+        timer2 = 0;
+        rb.velocity = new Vector2(dirX * dashSpeed, 0);
         Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
     }
     private void Attack()

@@ -43,7 +43,11 @@ public class enemyPatrol : MonoBehaviour
     {
         health -= damage;
         Resources.Load<Material>("FlashMaterial");
-
+        if (health <= 0)
+        {
+            //Debug.Log("Ded");
+            StartCoroutine(Die());
+        }
         if (flashRoutine != null)
         {
             // In this case, we should stop it first.
@@ -54,11 +58,7 @@ public class enemyPatrol : MonoBehaviour
         // Start the Coroutine, and store the reference for it.
         flashRoutine = StartCoroutine(FlashRoutine());
 
-        if (health <= 0)
-        {
-            //Debug.Log("Ded");
-            StartCoroutine(Die());
-        }
+        
     }
 
     private IEnumerator FlashRoutine()
@@ -79,7 +79,7 @@ public class enemyPatrol : MonoBehaviour
 
     IEnumerator Die()
     {    
-        //Debug.Log("Super Ded");
+        Debug.Log("Super Ded");
         deathSFX.Play();
         anim.SetTrigger("death");
         coll.enabled = !coll.enabled;

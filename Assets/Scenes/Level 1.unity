@@ -62278,7 +62278,7 @@ MonoBehaviour:
   jumpableGround:
     serializedVersion: 2
     m_Bits: 64
-  deathSFX: {fileID: 0}
+  deathSFX: {fileID: 920375557}
 --- !u!50 &1368745926
 Rigidbody2D:
   serializedVersion: 4

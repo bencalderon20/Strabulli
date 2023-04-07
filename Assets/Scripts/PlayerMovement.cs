@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     public static bool gameIsPaused;
     private bool dirRight = true;
+    private bool dashing = false;
+    private float dashX = 0f;
 
     public Transform FirePoint;
     public GameObject Laser;
@@ -70,8 +72,17 @@ public class PlayerMovement : MonoBehaviour
         if(timer>10) {
             anim.SetBool("attack", false);
         }
+        if (timer2 > 1) {
+            dashing = false;
+        }
         timer += Time.deltaTime;
         timer2 += Time.deltaTime;
+
+        
+        if (timer2 < 0.3 && dashing == true) {
+            rb.velocity = new Vector2(dashX * dashSpeed, 0);
+            Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
+        }
     }
 
     private void ShootLaser()
@@ -81,8 +92,10 @@ public class PlayerMovement : MonoBehaviour
     private void SpinachPunch()
     {
         timer2 = 0;
-        rb.velocity = new Vector2(dirX * dashSpeed, 0);
-        Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
+        dashX = dirX;
+        dashing = true;
+        //rb.velocity = new Vector2(dirX * dashSpeed, 0);
+        
     }
     private void Attack()
     {

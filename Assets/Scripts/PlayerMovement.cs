@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private float timer = Mathf.Infinity;
     private float timer2 = Mathf.Infinity;
-
+    private int brick = 0;
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform FirePoint;
     public GameObject Laser;
     public GameObject Spinach;
+    public GameObject Brick;
+    private bool BrickGround;
+    private int item;
     [SerializeField] private AudioSource shootSFX;
     // Start is called before the first frame update
     private void Awake()
@@ -41,14 +44,14 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-    }
+}
 
     // Update is called once per frame
     private void Update()
     {
         dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-
+        BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             jumpSFX.Play();
@@ -62,6 +65,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C) && canAttack())
         {
             anim.SetBool("attack", true);
+            item = 0;
+            Attack();
+        }
+        if (Input.GetKeyDown(KeyCode.B) && canAttack())
+        {
+            anim.SetBool("attack", true);
+            item = 1;
             Attack();
         }
         if (Input.GetKeyDown(KeyCode.V))
@@ -69,7 +79,8 @@ public class PlayerMovement : MonoBehaviour
 
             SpinachPunch();
         }
-        if(timer>10) {
+        if (timer > 10)
+        {
             anim.SetBool("attack", false);
         }
         if (timer2 > 1) {
@@ -97,22 +108,37 @@ public class PlayerMovement : MonoBehaviour
         //rb.velocity = new Vector2(dirX * dashSpeed, 0);
         
     }
+    private void ShootBrick()
+    {
+        Instantiate(Brick, FirePoint.position, FirePoint.rotation);
+    }
     private void Attack()
     {
         timer = 0;
-        shootSFX.Play();
-        ShootLaser();
+        if (item == 0)
+        {
+            shootSFX.Play();
+            ShootLaser();
+        }
+        else if (item == 1)
+        {
+            if (brick < 3&& !BrickGround)
+            {
+                ShootBrick();
+                brick++;
+            }
+        }
     }
 
     //pauses game
-    public void PauseGame ()
+    public void PauseGame()
     {
-        if(Time.timeScale == 1)
+        if (Time.timeScale == 1)
         {
             Time.timeScale = 0f;
             AudioListener.pause = true;
         }
-        else 
+        else
         {
             Time.timeScale = 1;
             AudioListener.pause = false;
@@ -129,19 +155,21 @@ public class PlayerMovement : MonoBehaviour
             //moveSFX.Play();
             state = MovementState.walking;
             sprite.flipX = false;
-            if (dirRight == false) {
+            if (dirRight == false)
+            {
                 transform.Rotate(0f, 180f, 0f);
                 dirRight = true;
             }
 
-            
+
         }
         else if (dirX < 0f)
         {
             //moveSFX.Play();
             state = MovementState.walking;
             //sprite.flipX = true;
-            if (dirRight == true) {
+            if (dirRight == true)
+            {
                 transform.Rotate(0f, 180f, 0f);
                 dirRight = false;
             }
@@ -161,7 +189,8 @@ public class PlayerMovement : MonoBehaviour
         if (rb.velocity.y > .1f)
         {
             state = MovementState.jumping;
-        } else if (rb.velocity.y < -.1f)
+        }
+        else if (rb.velocity.y < -.1f)
         {
             state = MovementState.falling;
         }
@@ -171,11 +200,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-       return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
     public bool canAttack()
     {
-        return Input.GetKeyDown(KeyCode.C);
+        return Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.B);
     }
-    
+
 }

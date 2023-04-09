@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             item = 1;
             Attack();
         }
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V) && timer2 > 1.2)
         {
 
             SpinachPunch();

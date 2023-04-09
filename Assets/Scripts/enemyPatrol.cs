@@ -42,12 +42,13 @@ public class enemyPatrol : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Resources.Load<Material>("FlashMaterial");
+        
         if (health <= 0)
         {
             //Debug.Log("Ded");
             StartCoroutine(Die());
         }
+        Resources.Load<Material>("FlashMaterial");
         if (flashRoutine != null)
         {
             // In this case, we should stop it first.

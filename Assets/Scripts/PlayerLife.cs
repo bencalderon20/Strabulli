@@ -7,6 +7,7 @@ public class PlayerLife : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private BoxCollider2D coll;
 
     [SerializeField] private AudioSource deathSFX;
 
@@ -15,6 +16,7 @@ public class PlayerLife : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        coll = GetComponent<BoxCollider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,6 +30,7 @@ public class PlayerLife : MonoBehaviour
     private void Die()
     {
         deathSFX.Play();
+        coll.enabled = !coll.enabled;
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("death");
     }

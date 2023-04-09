@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - GameMusic
   - OneWayPlatform
+  - Bullet
   layers:
   - Default
   - TransparentFX

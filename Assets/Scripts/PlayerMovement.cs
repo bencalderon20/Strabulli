@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private float timer = Mathf.Infinity;
     private float timer2 = Mathf.Infinity;
-    private int brick = 0;
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -35,7 +34,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Spinach;
     public GameObject Brick;
     private bool BrickGround;
+    private UnityEngine.Object[] bricks = new UnityEngine.Object[3];
     private int item;
+    private int i = 0;
+
     [SerializeField] private AudioSource shootSFX;
     // Start is called before the first frame update
     private void Awake()
@@ -51,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     {
         dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        BrickGround = Brick.GetComponent<Block>().IsGrounded();
+        //BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             jumpSFX.Play();
@@ -111,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
     private void ShootBrick()
     {
         Instantiate(Brick, FirePoint.position, FirePoint.rotation);
+        if (bricks[i] != null)
+        {
+            Destroy(bricks[i]);
+        }
+        bricks[i] = Brick;
     }
     private void Attack()
     {
@@ -122,11 +129,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (item == 1)
         {
-            if (brick < 3&& !BrickGround)
+            if (i < 3)
             {
                 ShootBrick();
-                brick++;
+                i++;
             }
+            else
+                i = 0;
         }
     }
 

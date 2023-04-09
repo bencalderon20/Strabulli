@@ -24,19 +24,14 @@ public class Block : MonoBehaviour
         enemyPatrol enemy = HitInfo.GetComponent<enemyPatrol>();
         if (enemy != null) {
             enemy.TakeDamage(damage);
+            Destroy(gameObject);
         }
-        /*if(collision.gameObject.name=="Terrain")
-        {
-
-        }*/
-        
     }
 
-    void OnBecameInvisible()
+    IEnumerator OnBecameInvisible()
     {
-        if(timer>10)
-            Destroy(gameObject);
-        timer += Time.deltaTime;
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 
     public bool IsGrounded()

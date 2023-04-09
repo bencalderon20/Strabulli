@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 162917104810577537}
   - component: {fileID: 1782598483826510528}
   - component: {fileID: 5568121479155708840}
-  m_Layer: 0
+  - component: {fileID: 4683305688410098864}
+  m_Layer: 6
   m_Name: Brick
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,9 +148,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  damage: 30
+  damage: 60
   coll: {fileID: 1782598483826510528}
   rb: {fileID: 162917104810577537}
   jumpableGround:
     serializedVersion: 2
     m_Bits: 64
+--- !u!251 &4683305688410098864
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3232424380174026013}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1

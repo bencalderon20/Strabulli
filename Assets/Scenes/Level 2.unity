@@ -1020,12 +1020,15 @@ MonoBehaviour:
   rightEdge: {fileID: 1823358420}
   leftEdge: {fileID: 1130402118}
   speed: 2
+  duration: 0
+  flashMaterial: {fileID: 0}
   health: 100
   deathEffect: {fileID: 0}
   jump: 7
   jumpableGround:
     serializedVersion: 2
     m_Bits: 0
+  deathSFX: {fileID: 0}
 --- !u!50 &656436381
 Rigidbody2D:
   serializedVersion: 4
@@ -1851,12 +1854,15 @@ MonoBehaviour:
   rightEdge: {fileID: 1833226282}
   leftEdge: {fileID: 2075599692}
   speed: 2
+  duration: 0
+  flashMaterial: {fileID: 0}
   health: 100
   deathEffect: {fileID: 0}
   jump: 7
   jumpableGround:
     serializedVersion: 2
     m_Bits: 0
+  deathSFX: {fileID: 0}
 --- !u!50 &1047222756
 Rigidbody2D:
   serializedVersion: 4
@@ -2564,12 +2570,15 @@ MonoBehaviour:
   rightEdge: {fileID: 575263861}
   leftEdge: {fileID: 910690032}
   speed: 2
+  duration: 0
+  flashMaterial: {fileID: 0}
   health: 100
   deathEffect: {fileID: 0}
   jump: 7
   jumpableGround:
     serializedVersion: 2
     m_Bits: 0
+  deathSFX: {fileID: 0}
 --- !u!1 &1359852213
 GameObject:
   m_ObjectHideFlags: 0
@@ -6943,6 +6952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab9b08e4cb47443a1670810a6b5724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSFX: {fileID: 0}
 --- !u!95 &1704324707
 Animator:
   serializedVersion: 5
@@ -6979,7 +6989,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   moveSpeed: 10
+  dashSpeed: 20
   jumpForce: 14
+  jumpSFX: {fileID: 0}
+  FirePoint: {fileID: 0}
+  Laser: {fileID: 0}
+  Spinach: {fileID: 0}
+  Brick: {fileID: 0}
+  shootSFX: {fileID: 0}
 --- !u!61 &1704324709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7146,12 +7163,15 @@ MonoBehaviour:
   rightEdge: {fileID: 2036185373}
   leftEdge: {fileID: 1978486962}
   speed: 2
+  duration: 0
+  flashMaterial: {fileID: 0}
   health: 100
   deathEffect: {fileID: 0}
   jump: 7
   jumpableGround:
     serializedVersion: 2
     m_Bits: 0
+  deathSFX: {fileID: 0}
 --- !u!50 &1748009801
 Rigidbody2D:
   serializedVersion: 4
@@ -66078,6 +66098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016977288}
   - component: {fileID: 2016977289}
+  - component: {fileID: 2016977290}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -66152,6 +66173,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2016977290
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016977287}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a9f36f58636601a4394b3e9ebf3d83dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2036185373
 GameObject:
   m_ObjectHideFlags: 0

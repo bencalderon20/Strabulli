@@ -81,7 +81,7 @@ public class enemyPatrol : MonoBehaviour
     IEnumerator Die()
     {    
         Debug.Log("Super Ded");
-        deathSFX.Play();
+        //deathSFX.Play();
         anim.SetTrigger("death");
         coll.enabled = !coll.enabled;
         yield return new WaitForSeconds(0.5f);

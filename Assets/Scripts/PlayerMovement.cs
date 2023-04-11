@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * Mathf.Log(Mathf.Abs(rb.velocity.x) + 1, 2) + dirX * moveSpeed, rb.velocity.y);
         //BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {

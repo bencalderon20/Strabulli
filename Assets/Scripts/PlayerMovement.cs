@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private float timer = Mathf.Infinity;
     private float timer2 = Mathf.Infinity;
+    private int brick = 0;
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioSource jumpSFX;
     //[SerializeField] private AudioSource moveSFX;
 
-    private enum MovementState { idle, walking, jumping, falling }
+    private enum MovementState { idle, walking, jumping, falling, attack }
 
     public static bool gameIsPaused;
     private bool dirRight = true;
@@ -34,10 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Spinach;
     public GameObject Brick;
     private bool BrickGround;
-    private UnityEngine.Object[] bricks = new UnityEngine.Object[3];
     private int item;
-    private int i = 0;
-
     [SerializeField] private AudioSource shootSFX;
     // Start is called before the first frame update
     private void Awake()
@@ -46,14 +44,14 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-}
+    }
 
     // Update is called once per frame
     private void Update()
     {
         dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * Mathf.Log(Mathf.Abs(rb.velocity.x) + 1, 2) + dirX * moveSpeed, rb.velocity.y);
-        //BrickGround = Brick.GetComponent<Block>().IsGrounded();
+        BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             jumpSFX.Play();
@@ -64,35 +62,20 @@ public class PlayerMovement : MonoBehaviour
         //    }
 
         UpdateAnimationState();
-        if (Input.GetKeyDown(KeyCode.C) && canAttack())
-        {
-            anim.SetBool("attack", true);
-            item = 0;
-            Attack();
-        }
-        if (Input.GetKeyDown(KeyCode.B) && canAttack())
-        {
-            anim.SetBool("attack", true);
-            item = 1;
-            Attack();
-        }
-        if (Input.GetKeyDown(KeyCode.V) && timer2 > 1.2)
-        {
-
-            SpinachPunch();
-        }
         if (timer > 10)
         {
             anim.SetBool("attack", false);
         }
-        if (timer2 > 1) {
+        if (timer2 > 1)
+        {
             dashing = false;
         }
         timer += Time.deltaTime;
         timer2 += Time.deltaTime;
 
-        
-        if (timer2 < 0.3 && dashing == true) {
+
+        if (timer2 < 0.3 && dashing == true)
+        {
             rb.velocity = new Vector2(dashX * dashSpeed, 0);
             Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
         }
@@ -108,34 +91,35 @@ public class PlayerMovement : MonoBehaviour
         dashX = dirX;
         dashing = true;
         //rb.velocity = new Vector2(dirX * dashSpeed, 0);
-        
+
     }
     private void ShootBrick()
     {
         Instantiate(Brick, FirePoint.position, FirePoint.rotation);
-        if (bricks[i] != null)
-        {
-            Destroy(bricks[i]);
-        }
-        bricks[i] = Brick;
     }
     private void Attack()
     {
         timer = 0;
-        if (item == 0)
+        anim.SetBool("attack", true);
+        if (Input.GetKeyDown(KeyCode.C))
         {
+            anim.SetInteger("fire", 0);
             shootSFX.Play();
             ShootLaser();
         }
-        else if (item == 1)
+        else if (Input.GetKeyDown(KeyCode.B))
         {
-            if (i < 3)
+            anim.SetInteger("fire", 1);
+            if (brick < 3 && !BrickGround)
             {
                 ShootBrick();
-                i++;
+                brick++;
             }
-            else
-                i = 0;
+        }
+        else if(Input.GetKeyDown(KeyCode.V) && IsGrounded() && timer2 > 1.2)
+        {
+            anim.SetInteger("fire", 2);
+            SpinachPunch();
         }
     }
 
@@ -188,6 +172,11 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.idle;
         }
+        if (canAttack())
+        {
+            state = MovementState.attack;
+            Attack();
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -213,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool canAttack()
     {
-        return Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.B);
+        return Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.B) ||Input.GetKeyDown(KeyCode.V);
     }
 
 }

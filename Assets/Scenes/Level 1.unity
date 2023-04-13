@@ -63296,7 +63296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab9b08e4cb47443a1670810a6b5724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
   deathSFX: {fileID: 1472383024}
+  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
+  health: 100
+  damage: 10
 --- !u!82 &1472383023
 AudioSource:
   m_ObjectHideFlags: 0

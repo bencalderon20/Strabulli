@@ -25,16 +25,16 @@ public class Grappler : MonoBehaviour
     {
         /*Vector3 place = Input.mousePosition;
         Vector3 p = new Vector3(place.x, place.y, transform.position.y);*/
-        MouseDir = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));//Gets the mouse's position in the screen
+        //MouseDir = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));//Gets the mouse's position in the screen
         if (connect == true)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Vector3 mousePos = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
-                lineRen.SetPosition(0, mousePos);
-                distjoin.connectedAnchor = mousePos;
-                distjoin.enabled = true;
-                LinePos.position = mousePos;
+                //Vector3 mousePos = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+                //lineRen.SetPosition(0, mousePos);
+                //distjoin.connectedAnchor = mousePos;
+                //distjoin.enabled = true;
+                //LinePos.position = mousePos;
             }
             if (Input.GetKey(KeyCode.Mouse0))
             {

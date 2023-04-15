@@ -9,6 +9,7 @@ TagManager:
   - GameMusic
   - OneWayPlatform
   - Bullet
+  - Pit
   layers:
   - Default
   - TransparentFX

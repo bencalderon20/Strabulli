@@ -79,6 +79,10 @@ public class PlayerLife : MonoBehaviour
         {
             TakeDamage(damage, collision.transform);
         }
+        if(collision.gameObject.CompareTag("Pit"))
+        {
+            TakeDamage(health, collision.transform);
+        }
     }
 
     private void Die()

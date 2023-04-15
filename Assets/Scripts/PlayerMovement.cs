@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * Mathf.Log(Mathf.Abs(rb.velocity.x) + 1, 2) + dirX * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
         BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimationState();
         if (timer > 10)
         {
-            anim.SetBool("attack", false);
+            anim.SetInteger("power", 0);
         }
         if (timer2 > 1)
         {
@@ -74,11 +74,7 @@ public class PlayerMovement : MonoBehaviour
         timer2 += Time.deltaTime;
 
 
-        if (timer2 < 0.3 && dashing == true)
-        {
-            rb.velocity = new Vector2(dashX * dashSpeed, 0);
-            Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
-        }
+        
     }
 
     private void ShootLaser()
@@ -91,6 +87,11 @@ public class PlayerMovement : MonoBehaviour
         dashX = dirX;
         dashing = true;
         //rb.velocity = new Vector2(dirX * dashSpeed, 0);
+        if (timer2 < 0.3 && dashing == true)
+        {
+            rb.velocity = new Vector2(dashX * dashSpeed, 0);
+            Instantiate(Spinach, FirePoint.position, FirePoint.rotation);
+        }
 
     }
     private void ShootBrick()
@@ -100,16 +101,15 @@ public class PlayerMovement : MonoBehaviour
     private void Attack()
     {
         timer = 0;
-        anim.SetBool("attack", true);
         if (Input.GetKeyDown(KeyCode.C))
         {
-            anim.SetInteger("fire", 0);
+            anim.SetInteger("power", 1);
             shootSFX.Play();
             ShootLaser();
         }
         else if (Input.GetKeyDown(KeyCode.B))
         {
-            anim.SetInteger("fire", 1);
+            anim.SetInteger("power", 2);
             if (brick < 3 && !BrickGround)
             {
                 ShootBrick();
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.V) && IsGrounded() && timer2 > 1.2)
         {
-            anim.SetInteger("fire", 2);
+            anim.SetInteger("power", 3);
             SpinachPunch();
         }
     }

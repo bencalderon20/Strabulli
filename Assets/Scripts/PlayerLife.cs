@@ -75,11 +75,11 @@ public class PlayerLife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Traps") || collision.gameObject.CompareTag("Enemy"))
+        if(collision.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(damage, collision.transform);
         }
-        if(collision.gameObject.CompareTag("Pit"))
+        if(collision.gameObject.CompareTag("Traps") || collision.gameObject.CompareTag("Pit"))
         {
             TakeDamage(health, collision.transform);
         }

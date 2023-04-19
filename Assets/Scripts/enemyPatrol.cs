@@ -11,10 +11,11 @@ public class enemyPatrol : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Transform currentPoint;
-    private BoxCollider2D coll;
+    private Collider2D coll;
     private SpriteRenderer spr;
     private Material originalMaterial;
     private Coroutine flashRoutine;
+    public bool canMove = true;
 
     [SerializeField] private float speed;
     [SerializeField] private float duration;
@@ -32,7 +33,7 @@ public class enemyPatrol : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coll = GetComponent<BoxCollider2D>();
+        coll = GetComponent<Collider2D>();
         spr = GetComponent<SpriteRenderer>();
         currentPoint = rightEdge.transform;
         anim.SetBool("moving", true);
@@ -92,26 +93,29 @@ public class enemyPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 point = currentPoint.position - transform.position;
+        if (canMove == true)
+        {
+            Vector2 point = currentPoint.position - transform.position;
 
-        if(currentPoint == rightEdge.transform)
-        {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
-        }
+            if (currentPoint == rightEdge.transform)
+            {
+                rb.velocity = new Vector2(speed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-speed, rb.velocity.y);
+            }
 
-        if(Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == rightEdge.transform)
-        {
-            flip();
-            currentPoint = leftEdge.transform;
-        }
-        if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == leftEdge.transform)
-        {
-            flip();
-            currentPoint = rightEdge.transform;
+            if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == rightEdge.transform)
+            {
+                flip();
+                currentPoint = leftEdge.transform;
+            }
+            if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == leftEdge.transform)
+            {
+                flip();
+                currentPoint = rightEdge.transform;
+            }
         }
 
         if (IsGrounded() && jump > 0f)

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7751821297117793035}
   m_Layer: 0
   m_Name: Grape
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5
-  timer: 0
 --- !u!61 &7751821297117793035
 BoxCollider2D:
   m_ObjectHideFlags: 0

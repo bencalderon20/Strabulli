@@ -6,24 +6,30 @@ public class EnemyBullet : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
-    private BoxCollider2D coll;
+    private Collider2D coll;
+    private bool stay = false;
     public float force;
-    //public float timer;
+    public float wait;
+    private float timer=0;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<BoxCollider2D>();
+        coll = GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
     }
 
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
         timer += Time.deltaTime;
-    }*/
+        if(stay&&timer>=wait)
+        {
+            Destroy(gameObject);
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -34,6 +40,7 @@ public class EnemyBullet : MonoBehaviour
     }
     void OnBecomeInvisible()
     {
-        Destroy(gameObject);
+        if(!stay)
+            Destroy(gameObject);
     }
 }

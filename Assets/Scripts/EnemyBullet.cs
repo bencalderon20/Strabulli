@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D coll;
     public bool stay = false;
+    public bool rotate = false;
     public int action = 0;
     public float force;
     public float wait;
@@ -20,6 +21,11 @@ public class EnemyBullet : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
+        if (rotate == true)
+        {
+            float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, rot);
+        }
     }
 
     // Update is called once per frame
@@ -38,20 +44,17 @@ public class EnemyBullet : MonoBehaviour
             other.gameObject.GetComponent<PlayerLife>().TakeDamage(20, coll.transform);
             Destroy(gameObject);
         }
-        else
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             switch (action)
             {
                 case 0:
                     break;
                 case 1:
-                    if (other.gameObject.layer==LayerMask.NameToLayer("Ground")) ;
-                    {
-                        Vector3 direction = player.transform.position - transform.position;
-                        rb.velocity = new Vector2(direction.x, 0f).normalized * force;
-                    }
+                    Vector3 direction = player.transform.position - transform.position;
+                    rb.velocity = new Vector2(direction.x, 0f).normalized * force;
                     break;
-                default:
+                case 2:
                     Destroy(gameObject);
                     break;
 

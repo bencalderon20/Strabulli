@@ -19,14 +19,21 @@ public class Block : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    /*void OnTriggerEnter2D (Collider2D HitInfo) {
+    private void Update()
+    {
+        if(IsGrounded()) {
+            rb.velocity = new Vector2(rb.velocity.x * 0.99f, rb.velocity.y);
+        }
+    }
+
+    void OnCollisionEnter2D (Collision2D HitInfo) {
         //Debug.Log(HitInfo.name);
-        enemyPatrol enemy = HitInfo.GetComponent<enemyPatrol>();
+        enemyPatrol enemy = HitInfo.gameObject.GetComponent<enemyPatrol>();
         if (enemy != null) {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage((int)(rb.velocity.magnitude * 5));
             //Destroy(gameObject);
         }
-    }*/
+    }
 
     IEnumerator OnBecameInvisible()
     {

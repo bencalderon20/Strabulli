@@ -153,7 +153,7 @@ MonoBehaviour:
   rb: {fileID: 162917104810577537}
   jumpableGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!251 &4683305688410098864
 PlatformEffector2D:
   m_ObjectHideFlags: 0

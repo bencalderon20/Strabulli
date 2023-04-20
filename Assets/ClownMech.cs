@@ -12,12 +12,14 @@ public class ClownMech : MonoBehaviour
     private Material originalMaterial;
     private Coroutine flashRoutine;
 
-    public GameObject bullet;
+    public GameObject purple;
+    public GameObject white;
     public Transform bulletPos;
     private GameObject player;
     private int attack;
     private float timer=0; //This timer will allow the mech to walk for a bit before attack
     private float timer2=0; //This timer will allow the selection animation to play before the mech attacks
+    System.Random random = new System.Random(); //This will allow the mech to "randomly" select which attack it will use
 
     [SerializeField] private float speed;
     [SerializeField] private float duration;
@@ -40,7 +42,6 @@ public class ClownMech : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         currentPoint = rightEdge.transform;
         originalMaterial = spr.material;
-        System.Random random = new System.Random(); //This will allow the mech to "randomly" select which attack it will use
     }
 
     // Update is called once per frame
@@ -68,15 +69,23 @@ public class ClownMech : MonoBehaviour
             timer2 += Time.deltaTime;
             if(timer2>20)
             {
-                attack = random.Next(7);
+                //anim.SetBool("Shoot", true);*/
+                attack = random.Next(2);
                 switch (attack)
                 {
                     case 0:
-
+                        //anim.SetBool("Selecting", false);
+                        Instantiate(purple, bulletPos.position, Quaternion.identity);
+                        break;
+                    case 1:
+                        //anim.SetBool("Selecting", false);
+                        Instantiate(white, bulletPos.position, Quaternion.identity);
+                        break;
                 }
-            }*/
-            Instantiate(bullet, bulletPos.position, Quaternion.identity);
-            timer = 0;
+                /*timer2 = 0;
+            }
+            
+           */ timer = 0;
         }
         timer += Time.deltaTime;
     }

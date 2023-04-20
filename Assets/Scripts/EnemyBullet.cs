@@ -7,7 +7,8 @@ public class EnemyBullet : MonoBehaviour
     private GameObject player;
     private Rigidbody2D rb;
     private Collider2D coll;
-    private bool stay = false;
+    public bool stay = false;
+    public int action = 0;
     public float force;
     public float wait;
     private float timer=0;
@@ -36,6 +37,25 @@ public class EnemyBullet : MonoBehaviour
         {
             other.gameObject.GetComponent<PlayerLife>().TakeDamage(20, coll.transform);
             Destroy(gameObject);
+        }
+        else
+        {
+            switch (action)
+            {
+                case 0:
+                    break;
+                case 1:
+                    if (other.gameObject.layer==LayerMask.NameToLayer("Ground")) ;
+                    {
+                        Vector3 direction = player.transform.position - transform.position;
+                        rb.velocity = new Vector2(direction.x, 0f).normalized * force;
+                    }
+                    break;
+                default:
+                    Destroy(gameObject);
+                    break;
+
+            }
         }
     }
     void OnBecomeInvisible()

@@ -19,19 +19,19 @@ public class Block : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    void OnTriggerEnter2D (Collider2D HitInfo) {
+    /*void OnTriggerEnter2D (Collider2D HitInfo) {
         //Debug.Log(HitInfo.name);
         enemyPatrol enemy = HitInfo.GetComponent<enemyPatrol>();
         if (enemy != null) {
             enemy.TakeDamage(damage);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
-    }
+    }*/
 
     IEnumerator OnBecameInvisible()
     {
         yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public bool IsGrounded()

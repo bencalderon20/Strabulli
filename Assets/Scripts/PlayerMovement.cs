@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
             if (brick < 3 && !BrickGround)
             {
                 ShootBrick();
-                brick++;
+                //brick++;
             }
         }
         else if(Input.GetKeyDown(KeyCode.V) && IsGrounded() && timer2 > 1.2)

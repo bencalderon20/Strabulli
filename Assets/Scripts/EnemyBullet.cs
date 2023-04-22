@@ -52,7 +52,7 @@ public class EnemyBullet : MonoBehaviour
                     break;
                 case 1:
                     Vector3 direction = player.transform.position - transform.position;
-                    rb.velocity = new Vector2(direction.x, 0f).normalized * force;
+                    rb.velocity = new Vector2(-direction.x, 0f).normalized * force;
                     break;
                 case 2:
                     Destroy(gameObject);

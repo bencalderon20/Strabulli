@@ -20,9 +20,9 @@ public class ClownMech : MonoBehaviour
     public Transform bulletPos;
     public Transform saucePos;
     private GameObject player;
-    private int attack;
     private float timer=0; //This timer will allow the mech to walk for a bit before attack
     private float timer2=0; //This timer will allow the selection animation to play before the mech attacks
+    private int attack = -1;
     private bool dash = false;
     System.Random random = new System.Random(); //This will allow the mech to "randomly" select which attack it will use
 
@@ -30,7 +30,7 @@ public class ClownMech : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private Material flashMaterial;
     [SerializeField] private int health = 10000;
-    [SerializeField] private GameObject deathEffect;
+    //[SerializeField] private GameObject deathEffect;
 
     //[SerializeField] private AudioSource deathSFX;
 
@@ -55,7 +55,7 @@ public class ClownMech : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dash==false)
+        if (attack == -1)
         {
             if (currentPoint == rightEdge.transform)
             {
@@ -75,49 +75,29 @@ public class ClownMech : MonoBehaviour
             }
             if (timer >= 10)
             {
-                /*anim.SetBool("Selecting", true);
+                anim.SetBool("Selecting", true);
                 timer2 += Time.deltaTime;
-                if(timer2>20)
+                if (timer2 > .005)
                 {
-                    //anim.SetBool("Shoot", true);*/
-                attack = random.Next(5);
-                switch (attack)
-                {
-                    case 0:
-                        //anim.SetBool("Selecting", false);
-                        Instantiate(white, bulletPos.position, Quaternion.identity);
-                        break;
-                    case 1:
-                        //anim.SetBool("Selecting", false);
-                        Instantiate(purple, bulletPos.position, Quaternion.identity);
-                        break;
-                    case 2:
-                        //anim.SetBool("Selecting", false);
-                        Instantiate(orange, bulletPos.position, Quaternion.identity);
-                        break;
-                    case 3:
-                        
-                        break;
-                    case 4:
-                        dash = true;
-                        currentPoint = dashEdge.transform;
-                        break;
+                    anim.SetBool("Selecting", false);
+                    attack = random.Next(5);
+                    Debug.Log(attack);
+                    timer2 = 0;
                 }
-                /*timer2 = 0;
-            }
-            
-           */
                 timer = 0;
             }
             timer += Time.deltaTime;
         }
-        else
+        else if (dash == true)
         {
             if (currentPoint == dashEdge.transform)
             {
                 if (timer2 > 5)
                 {
-                    rb.velocity = new Vector2(-speed * 4, rb.velocity.y);
+                    Debug.Log(speed);
+                    float ram = -speed * 4;
+                    Debug.Log(ram);
+                    rb.velocity = new Vector2(ram, rb.velocity.y);
                 }
                 else
                     rb.velocity = new Vector2(0, rb.velocity.y);
@@ -125,7 +105,7 @@ public class ClownMech : MonoBehaviour
             }
             else
             {
-                rb.velocity = new Vector2(speed * 1.5f, rb.velocity.y);
+                rb.velocity = new Vector2(speed, rb.velocity.y);
             }
             if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.6f && currentPoint == dashEdge.transform)
             {
@@ -138,8 +118,52 @@ public class ClownMech : MonoBehaviour
                 currentPoint = rightEdge.transform;
             }
         }
+        else
+        {
+            anim.SetInteger("Attack", attack+1);
+            timer2 += Time.deltaTime;
+            if (timer2 > 5)
+            {
+                anim.SetInteger("Attack", 0);
+                switch (attack)
+                {
+                    case 0:
+                        //anim.SetBool("Shoot", true);
+                        Instantiate(white, bulletPos.position, Quaternion.identity);
+                        //anim.SetBool("Shoot", false);
+                        attack = -1;
+                        timer2 = 0;
+                        break;
+                    case 1:
+                        //anim.SetBool("Shoot", true);
+                        Instantiate(purple, bulletPos.position, Quaternion.identity);
+                        //anim.SetBool("Shoot", false);
+                        attack = -1;
+                        timer2 = 0;
+                        break;
+                    case 2:
+                        //anim.SetBool("Shoot", true);
+                        Instantiate(orange, bulletPos.position, Quaternion.identity);
+                        //anim.SetBool("Shoot", false);
+                        attack = -1; 
+                        timer2 = 0;
+                        break;
+                    case 3:
+                        Instantiate(sauce, saucePos.position, Quaternion.identity);
+                        attack = -1;
+                        timer2 = 0;
+                        break;
+                    case 4:
+                        dash = true;
+                        currentPoint = dashEdge.transform;
+                        attack = -1;
+                        timer2 = 0;
+                        break;
+                }
+            }
+            //Debug.Log(timer2);
+        }
     }
-
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -162,6 +186,14 @@ public class ClownMech : MonoBehaviour
 
 
     }
+
+    /*void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="OneWayPlatform")
+        {
+
+        }
+    }*/
 
     private IEnumerator FlashRoutine()
     {
@@ -186,12 +218,5 @@ public class ClownMech : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
-    }
-    void ShootSauce()
-    {
-        float tme = 0;
-        if(tme%3==0)
-            Instantiate(sauce, saucePos.position, Quaternion.identity);
-        tme += Time.deltaTime;
     }
 }

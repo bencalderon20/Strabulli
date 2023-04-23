@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
     private bool BrickGround;
     private int item;
     [SerializeField] private AudioSource shootSFX;
+
+    private GameObject[] BrickList;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        BrickList = new GameObject[5];
     }
 
     // Update is called once per frame
@@ -96,7 +100,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void ShootBrick()
     {
-        Instantiate(Brick, FirePoint.position, FirePoint.rotation);
+        GameObject tempBrick = Instantiate(Brick, FirePoint.position, FirePoint.rotation);
+        Destroy(BrickList[brick%5]);
+        BrickList[brick%5] = tempBrick;
     }
     private void Attack()
     {
@@ -110,10 +116,10 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.B))
         {
             anim.SetInteger("power", 2);
-            if (brick < 3 && !BrickGround)
+            if (!BrickGround)
             {
                 ShootBrick();
-                //brick++;
+                brick++;
             }
         }
         else if(Input.GetKeyDown(KeyCode.V) && IsGrounded() && timer2 > 1.2)

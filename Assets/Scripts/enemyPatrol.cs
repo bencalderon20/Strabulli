@@ -83,7 +83,10 @@ public class enemyPatrol : MonoBehaviour
     {    
         Debug.Log("Super Ded");
         //deathSFX.Play();
-        anim.SetTrigger("death");
+
+        //anim.SetTrigger("death");
+ 
+        
         coll.enabled = !coll.enabled;
         yield return new WaitForSeconds(0.5f);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);

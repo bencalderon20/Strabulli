@@ -35,10 +35,9 @@ public class enemyPatrol : MonoBehaviour
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
         spr = GetComponent<SpriteRenderer>();
-        originalMaterial = spr.material;
         currentPoint = rightEdge.transform;
         anim.SetBool("moving", true);
-        
+        originalMaterial = spr.material;
     }
 
     public void TakeDamage(int damage)

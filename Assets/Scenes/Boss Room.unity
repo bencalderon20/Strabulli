@@ -15606,7 +15606,7 @@ MonoBehaviour:
   speed: 2.5
   duration: 0
   flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
-  health: 10000
+  health: 5000
   rightEdge: {fileID: 3720796311578445572}
   leftEdge: {fileID: 3720796311913911681}
   dashEdge: {fileID: 3720796312335935371}

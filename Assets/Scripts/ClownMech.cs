@@ -219,5 +219,6 @@ public class ClownMech : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

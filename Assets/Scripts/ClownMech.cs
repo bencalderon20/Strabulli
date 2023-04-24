@@ -15,6 +15,7 @@ public class ClownMech : MonoBehaviour
     [SerializeField] private GameObject purple;
     [SerializeField] private GameObject white;
     [SerializeField] private GameObject orange;
+    [SerializeField] private GameObject stripe;
     [SerializeField] private GameObject sauce;
     private GameObject clown;
     public Transform bulletPos;
@@ -29,7 +30,7 @@ public class ClownMech : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float duration;
     [SerializeField] private Material flashMaterial;
-    [SerializeField] private int health = 10000;
+    [SerializeField] private int health = 10;
     //[SerializeField] private GameObject deathEffect;
 
     //[SerializeField] private AudioSource deathSFX;
@@ -55,49 +56,115 @@ public class ClownMech : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (attack == -1)
+        if (!dash)
         {
-            if (currentPoint == rightEdge.transform)
+
+            if (attack < 0)
             {
-                rb.velocity = new Vector2(speed, rb.velocity.y);
+                if (currentPoint == rightEdge.transform)
+                {
+                    rb.velocity = new Vector2(speed, rb.velocity.y);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(-speed, rb.velocity.y);
+                }
+                if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == rightEdge.transform)
+                {
+                    currentPoint = leftEdge.transform;
+                }
+                if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == leftEdge.transform)
+                {
+                    currentPoint = rightEdge.transform;
+                }
+                timer += Time.deltaTime;
+                Debug.Log(timer);
+                if (timer >= 5)
+                {
+                    anim.SetBool("Selecting", true);
+                    timer2 += Time.deltaTime;
+                    if (timer2 > .005)
+                    {
+                        anim.SetBool("Selecting", false);
+                        attack = random.Next(6);
+                        //Debug.Log(attack);
+                        timer2 = 0;
+                    }
+                    timer = 0;
+                }
             }
             else
             {
-                rb.velocity = new Vector2(-speed, rb.velocity.y);
-            }
-            if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == rightEdge.transform)
-            {
-                currentPoint = leftEdge.transform;
-            }
-            if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.5f && currentPoint == leftEdge.transform)
-            {
-                currentPoint = rightEdge.transform;
-            }
-            if (timer >= 10)
-            {
-                anim.SetBool("Selecting", true);
+                anim.SetInteger("Attack", attack + 1);
+                //Debug.Log("Hello" + timer2);
                 timer2 += Time.deltaTime;
-                if (timer2 > .005)
+                if (timer2 > 3)
                 {
-                    anim.SetBool("Selecting", false);
-                    attack = random.Next(5);
-                    Debug.Log(attack);
-                    timer2 = 0;
+                    anim.SetInteger("Attack", 0);
+                    switch (attack)
+                    {
+                        case 0:
+                            //anim.SetBool("Shoot", true);
+                            if (timer2 > 5)
+                            {
+                                Instantiate(white, bulletPos.position, Quaternion.identity);
+                                //anim.SetBool("Shoot", false);
+                                attack = -1;
+                                timer2 = 0;
+                            }
+                            break;
+                        case 1:
+                            //anim.SetBool("Shoot", true);
+                            if (timer2 > 5)
+                            {
+                                Instantiate(purple, bulletPos.position, Quaternion.identity);
+                                //anim.SetBool("Shoot", false);
+                                attack = -1;
+                                timer2 = 0;
+                            }
+                            break;
+                        case 2:
+                            //anim.SetBool("Shoot", true);
+                            if (timer2 > 5)
+                            {
+                                Instantiate(orange, bulletPos.position, Quaternion.identity);
+                                //anim.SetBool("Shoot", false);
+                                attack = -1;
+                                timer2 = 0;
+                            }
+                            break;
+                        case 3:
+                            //anim.SetBool("Shoot", true);
+                            if (timer2 > 5)
+                            {
+                                Instantiate(stripe, bulletPos.position, Quaternion.identity);
+                                //anim.SetBool("Shoot", false);
+                                attack = -1;
+                                timer2 = 0;
+                            }
+                            break;
+                        case 4:
+                            Instantiate(sauce, saucePos.position, Quaternion.identity);
+                            attack = -1;
+                            timer2 = 0;
+                            break;
+                        case 5:
+                            dash = true;
+                            currentPoint = dashEdge.transform;
+                            attack = -1;
+                            timer2 = 0;
+                            break;
+                    }
                 }
-                timer = 0;
             }
-            timer += Time.deltaTime;
         }
-        else if (dash == true)
+        else
         {
             if (currentPoint == dashEdge.transform)
             {
                 if (timer2 > 5)
                 {
-                    Debug.Log(speed);
-                    float ram = -speed * 4;
-                    Debug.Log(ram);
-                    rb.velocity = new Vector2(ram, rb.velocity.y);
+                    rb.velocity = new Vector2(-speed * 4, rb.velocity.y);
                 }
                 else
                     rb.velocity = new Vector2(0, rb.velocity.y);
@@ -105,7 +172,7 @@ public class ClownMech : MonoBehaviour
             }
             else
             {
-                rb.velocity = new Vector2(speed, rb.velocity.y);
+                rb.velocity = new Vector2(speed * 1.5f, rb.velocity.y);
             }
             if (Mathf.Abs(transform.position.x - currentPoint.position.x) < 0.6f && currentPoint == dashEdge.transform)
             {
@@ -117,61 +184,17 @@ public class ClownMech : MonoBehaviour
                 dash = false;
                 currentPoint = rightEdge.transform;
             }
-        }
-        else
-        {
-            anim.SetInteger("Attack", attack+1);
-            timer2 += Time.deltaTime;
-            if (timer2 > 5)
-            {
-                anim.SetInteger("Attack", 0);
-                switch (attack)
-                {
-                    case 0:
-                        //anim.SetBool("Shoot", true);
-                        Instantiate(white, bulletPos.position, Quaternion.identity);
-                        //anim.SetBool("Shoot", false);
-                        attack = -1;
-                        timer2 = 0;
-                        break;
-                    case 1:
-                        //anim.SetBool("Shoot", true);
-                        Instantiate(purple, bulletPos.position, Quaternion.identity);
-                        //anim.SetBool("Shoot", false);
-                        attack = -1;
-                        timer2 = 0;
-                        break;
-                    case 2:
-                        //anim.SetBool("Shoot", true);
-                        Instantiate(orange, bulletPos.position, Quaternion.identity);
-                        //anim.SetBool("Shoot", false);
-                        attack = -1; 
-                        timer2 = 0;
-                        break;
-                    case 3:
-                        Instantiate(sauce, saucePos.position, Quaternion.identity);
-                        attack = -1;
-                        timer2 = 0;
-                        break;
-                    case 4:
-                        dash = true;
-                        currentPoint = dashEdge.transform;
-                        attack = -1;
-                        timer2 = 0;
-                        break;
-                }
-            }
-            //Debug.Log(timer2);
-        }
+        }        
     }
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        Debug.Log(health);
         if (health <= 0)
         {
-            //Debug.Log("Ded");
+            Debug.Log("Ded");
             StartCoroutine(Die());
+            //Die();
         }
         Resources.Load<Material>("FlashMaterial");
         if (flashRoutine != null)
@@ -186,14 +209,6 @@ public class ClownMech : MonoBehaviour
 
 
     }
-
-    /*void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag=="OneWayPlatform")
-        {
-
-        }
-    }*/
 
     private IEnumerator FlashRoutine()
     {
@@ -213,9 +228,9 @@ public class ClownMech : MonoBehaviour
     {
         Debug.Log("Super Ded");
         //deathSFX.Play();
-       // anim.SetTrigger("death");
+        anim.SetTrigger("death");
         coll.enabled = !coll.enabled;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

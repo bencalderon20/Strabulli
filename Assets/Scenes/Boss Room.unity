@@ -15480,7 +15480,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3720796312265195095}
-  - component: {fileID: 3720796312265195096}
   - component: {fileID: 3720796312265195094}
   - component: {fileID: 3720796312265195101}
   - component: {fileID: 3720796312265195098}
@@ -15534,31 +15533,6 @@ Transform:
   m_Father: {fileID: 3720796311998029489}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3720796312265195096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3720796312265195092}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc0a98408529014f898995bea064f91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightEdge: {fileID: 3720796311578445572}
-  leftEdge: {fileID: 3720796311913911681}
-  canMove: 1
-  speed: 2
-  duration: 0
-  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
-  health: 500
-  deathEffect: {fileID: 0}
-  jump: 7
-  jumpableGround:
-    serializedVersion: 2
-    m_Bits: 0
-  deathSFX: {fileID: 0}
 --- !u!212 &3720796312265195098
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15631,7 +15605,7 @@ MonoBehaviour:
   saucePos: {fileID: 3720796312141250445}
   speed: 2.5
   duration: 0
-  flashMaterial: {fileID: 0}
+  flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
   health: 10000
   rightEdge: {fileID: 3720796311578445572}
   leftEdge: {fileID: 3720796311913911681}

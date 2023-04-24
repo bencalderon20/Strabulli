@@ -16,6 +16,14 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D HitInfo) {
         //Debug.Log(HitInfo.name);
+        //if(HitInfo.gameObject.CompareTag("ClownMech"))
+        //{
+            ClownMech clown = HitInfo.GetComponent<ClownMech>();
+            if (clown != null) {
+                clown.TakeDamage(damage);
+            }
+            
+        //}
         enemyPatrol enemy = HitInfo.GetComponent<enemyPatrol>();
         if (enemy != null) {
             enemy.TakeDamage(damage);

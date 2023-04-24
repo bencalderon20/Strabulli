@@ -45,9 +45,10 @@ public class ClownMech : MonoBehaviour
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
         spr = GetComponent<SpriteRenderer>();
+        originalMaterial = spr.material;
         player = GameObject.FindGameObjectWithTag("Player");
         currentPoint = rightEdge.transform;
-        originalMaterial = spr.material;
+        
 
         
     }
@@ -73,7 +74,7 @@ public class ClownMech : MonoBehaviour
             {
                 currentPoint = rightEdge.transform;
             }
-            if (timer >= 10)
+            if (timer >= 2)
             {
                 anim.SetBool("Selecting", true);
                 timer2 += Time.deltaTime;
@@ -122,7 +123,7 @@ public class ClownMech : MonoBehaviour
         {
             anim.SetInteger("Attack", attack+1);
             timer2 += Time.deltaTime;
-            if (timer2 > 5)
+            if (timer2 > 2)
             {
                 anim.SetInteger("Attack", 0);
                 switch (attack)

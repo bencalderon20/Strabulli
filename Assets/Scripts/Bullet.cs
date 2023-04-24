@@ -25,8 +25,18 @@ public class Bullet : MonoBehaviour
             
         //}
         enemyPatrol enemy = HitInfo.GetComponent<enemyPatrol>();
+        ClownMech mech= HitInfo.GetComponent<ClownMech>();
+        Clown_Legs legs = HitInfo.GetComponent<Clown_Legs>();
         if (enemy != null) {
             enemy.TakeDamage(damage);
+        }
+        if(mech != null)
+        {
+            mech.TakeDamage(damage);
+        }
+        if (legs != null)
+        {
+            legs.TakeDamage(damage);
         }
         Destroy(gameObject);
     }

@@ -28,7 +28,7 @@ public class Block : MonoBehaviour
 
     void OnCollisionEnter2D (Collision2D HitInfo) {
         //Debug.Log(HitInfo.name);
-        ClownMech clown = HitInfo.GetComponent<ClownMech>();
+        ClownMech clown = HitInfo.gameObject.GetComponent<ClownMech>();
         if (clown != null) {
             clown.TakeDamage(damage);
         }

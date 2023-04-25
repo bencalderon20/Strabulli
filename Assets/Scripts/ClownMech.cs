@@ -35,22 +35,24 @@ public class ClownMech : MonoBehaviour
     //[SerializeField] private GameObject deathEffect;
 
     //[SerializeField] private AudioSource deathSFX;
+    [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource launch;
 
     [SerializeField] private GameObject rightEdge;
     [SerializeField] private GameObject leftEdge;
     [SerializeField] private GameObject dashEdge;
+    private bool select = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
         spr = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         currentPoint = rightEdge.transform;
         originalMaterial = spr.material;
-
         
     }
 
@@ -82,22 +84,25 @@ public class ClownMech : MonoBehaviour
                 Debug.Log(timer);
                 if (timer >= 5)
                 {
+                    select = true;
                     anim.SetBool("Selecting", true);
-                    timer2 += Time.deltaTime;
-                    if (timer2 > .005)
+                    //timer2 += Time.deltaTime;
+                    if (timer > 10)
                     {
+                        select = false;
                         anim.SetBool("Selecting", false);
+                        selectSound.Stop();
                         attack = random.Next(6);
                         //Debug.Log(attack);
-                        timer2 = 0;
+                        //timer2 = 0;
+                        timer = 0;
                     }
-                    timer = 0;
                 }
+
             }
             else
             {
                 anim.SetInteger("Attack", attack + 1);
-                //Debug.Log("Hello" + timer2);
                 timer2 += Time.deltaTime;
                 if (timer2 > 3)
                 {
@@ -105,41 +110,38 @@ public class ClownMech : MonoBehaviour
                     switch (attack)
                     {
                         case 0:
-                            //anim.SetBool("Shoot", true);
                             if (timer2 > 5)
                             {
+
+                                launch.Play(); 
                                 Instantiate(white, bulletPos.position, Quaternion.identity);
-                                //anim.SetBool("Shoot", false);
                                 attack = -1;
                                 timer2 = 0;
                             }
                             break;
                         case 1:
-                            //anim.SetBool("Shoot", true);
                             if (timer2 > 5)
                             {
+                                launch.Play();
                                 Instantiate(purple, bulletPos.position, Quaternion.identity);
-                                //anim.SetBool("Shoot", false);
                                 attack = -1;
                                 timer2 = 0;
                             }
                             break;
                         case 2:
-                            //anim.SetBool("Shoot", true);
                             if (timer2 > 5)
                             {
+                                launch.Play();
                                 Instantiate(orange, bulletPos.position, Quaternion.identity);
-                                //anim.SetBool("Shoot", false);
                                 attack = -1;
                                 timer2 = 0;
                             }
                             break;
                         case 3:
-                            //anim.SetBool("Shoot", true);
                             if (timer2 > 5)
                             {
+                                launch.Play();
                                 Instantiate(stripe, bulletPos.position, Quaternion.identity);
-                                //anim.SetBool("Shoot", false);
                                 attack = -1;
                                 timer2 = 0;
                             }
@@ -157,6 +159,10 @@ public class ClownMech : MonoBehaviour
                             break;
                     }
                 }
+            }
+            if (select)
+            {
+                selectSound.Play();
             }
         }
         else
@@ -185,11 +191,12 @@ public class ClownMech : MonoBehaviour
                 dash = false;
                 currentPoint = rightEdge.transform;
             }
-        }        
+        }
     }
     public void TakeDamage(int damage)
     {
         health -= damage;
+        speed = 0;
         Debug.Log(health);
         if (health <= 0)
         {
@@ -234,6 +241,8 @@ public class ClownMech : MonoBehaviour
         yield return new WaitForSeconds(2);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    
     }
 }

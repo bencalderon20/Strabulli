@@ -35,6 +35,7 @@ public class ClownMech : MonoBehaviour
 
     //[SerializeField] private AudioSource deathSFX;
     [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource launch;
 
     [SerializeField] private GameObject rightEdge;
     [SerializeField] private GameObject leftEdge;
@@ -51,7 +52,6 @@ public class ClownMech : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         currentPoint = rightEdge.transform;
         originalMaterial = spr.material;
-        selectSound.loop = true;
         
     }
 
@@ -83,11 +83,12 @@ public class ClownMech : MonoBehaviour
                 Debug.Log(timer);
                 if (timer >= 5)
                 {
-                    selectSound.Play(0);
+                    select = true;
                     anim.SetBool("Selecting", true);
                     //timer2 += Time.deltaTime;
                     if (timer > 10)
                     {
+                        select = false;
                         anim.SetBool("Selecting", false);
                         selectSound.Stop();
                         attack = random.Next(6);
@@ -96,6 +97,7 @@ public class ClownMech : MonoBehaviour
                         timer = 0;
                     }
                 }
+
             }
             else
             {
@@ -109,6 +111,8 @@ public class ClownMech : MonoBehaviour
                         case 0:
                             if (timer2 > 5)
                             {
+
+                                launch.Play(); 
                                 Instantiate(white, bulletPos.position, Quaternion.identity);
                                 attack = -1;
                                 timer2 = 0;
@@ -117,6 +121,7 @@ public class ClownMech : MonoBehaviour
                         case 1:
                             if (timer2 > 5)
                             {
+                                launch.Play();
                                 Instantiate(purple, bulletPos.position, Quaternion.identity);
                                 attack = -1;
                                 timer2 = 0;
@@ -125,6 +130,7 @@ public class ClownMech : MonoBehaviour
                         case 2:
                             if (timer2 > 5)
                             {
+                                launch.Play();
                                 Instantiate(orange, bulletPos.position, Quaternion.identity);
                                 attack = -1;
                                 timer2 = 0;
@@ -133,6 +139,7 @@ public class ClownMech : MonoBehaviour
                         case 3:
                             if (timer2 > 5)
                             {
+                                launch.Play();
                                 Instantiate(stripe, bulletPos.position, Quaternion.identity);
                                 attack = -1;
                                 timer2 = 0;
@@ -151,6 +158,10 @@ public class ClownMech : MonoBehaviour
                             break;
                     }
                 }
+            }
+            if (select)
+            {
+                selectSound.Play();
             }
         }
         else
@@ -179,10 +190,6 @@ public class ClownMech : MonoBehaviour
                 dash = false;
                 currentPoint = rightEdge.transform;
             }
-        }
-        if(select)
-        {
-
         }
     }
     public void TakeDamage(int damage)

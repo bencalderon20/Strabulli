@@ -30,12 +30,19 @@ public class ChatBubble : MonoBehaviour
 
     IEnumerator UpdateText()
     {  
-        Setup("Long, Long Ago");
+        Setup("Once upon a time, in a land far away from here.");
         yield return new WaitForSeconds(2f);
-        Setup("There was once a man named steve");
+        Setup("There was a small jelly bean named Strabulli");
         yield return new WaitForSeconds(2f);
-        Setup("He enjoyed pizza pie");
+        Setup("He was enjoying life and drinking from a lemonade stand");
+        yield return new WaitForSeconds(2.5f);
+        Setup("All of a sudden, he was attacked by an evil tomato named Tometi who was promoting his brand of tomato juice");
+        yield return new WaitForSeconds(5f);
+        Setup("In his darkest moment, Strabulli met a wise mentor in the form of a rat");
+        yield return new WaitForSeconds(4f);
+        Setup("He was encouraged to get revenge, and thus began this epic adventure");
         yield return new WaitForSeconds(2f);
+
     }
 
     private void Setup(string text) {

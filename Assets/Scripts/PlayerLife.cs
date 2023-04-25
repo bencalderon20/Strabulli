@@ -19,6 +19,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private  int health = 100;
     public int damage = 1;
     private float direction;
+    int hitCounter = 0;
 
     // Start is called before the first frame update
     private void Start()
@@ -32,9 +33,11 @@ public class PlayerLife : MonoBehaviour
 
     public void TakeDamage(int damage, Transform transform2)
     {
+        PlayerMovement player = GetComponent<PlayerMovement>();
+        player.timer3 = 0;
         direction = transform2.position.x - transform.position.x;
         Debug.Log(direction);
-        rb.velocity = new Vector2(rb.velocity.x + Mathf.Sign(direction) * -100, 14);
+        rb.velocity = new Vector2(rb.velocity.x + Mathf.Sign(direction) * -10, 14);
         
         
         health -= damage;
@@ -83,6 +86,23 @@ public class PlayerLife : MonoBehaviour
         {
             TakeDamage(health, collision.transform);
         }
+        if(collision.gameObject.CompareTag("colliderDisabler"))
+        {
+            TakeDamage(0, collision.transform);
+            hitCounter = hitCounter+1;
+            if (hitCounter == 3)
+            {
+                StartCoroutine(colliderDisabling());
+            }
+        }
+    }
+
+    IEnumerator colliderDisabling()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(2);
+        GetComponent<Collider2D>().enabled = true;
+
     }
 
     private void Die()

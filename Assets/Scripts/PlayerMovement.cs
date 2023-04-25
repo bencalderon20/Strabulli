@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private float timer = Mathf.Infinity;
     private float timer2 = Mathf.Infinity;
+    public float timer3 = Mathf.Infinity;
     private int brick = 0;
 
     [SerializeField] private LayerMask jumpableGround;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool dirRight = true;
     private bool dashing = false;
     private float dashX = 0f;
+    private bool hit = false;
 
     public Transform FirePoint;
     public GameObject Laser;
@@ -54,7 +56,10 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        if(timer3 > 0.3f) {
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        }
+        
         BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -76,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
         }
         timer += Time.deltaTime;
         timer2 += Time.deltaTime;
+        timer3 += Time.deltaTime;
 
 
         

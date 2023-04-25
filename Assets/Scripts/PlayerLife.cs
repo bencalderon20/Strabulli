@@ -32,9 +32,11 @@ public class PlayerLife : MonoBehaviour
 
     public void TakeDamage(int damage, Transform transform2)
     {
+        PlayerMovement player = GetComponent<PlayerMovement>();
+        player.timer3 = 0;
         direction = transform2.position.x - transform.position.x;
         Debug.Log(direction);
-        rb.velocity = new Vector2(rb.velocity.x + Mathf.Sign(direction) * -100, 14);
+        rb.velocity = new Vector2(rb.velocity.x + Mathf.Sign(direction) * -10, 14);
         
         
         health -= damage;

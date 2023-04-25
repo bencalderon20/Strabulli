@@ -18,7 +18,7 @@ public class ChatBubble : MonoBehaviour
 
     void Start() {
         
-        Setup("Press S To Read The Story");
+        Setup("Press S To Speak To Squeakiams");
     }
 
     private void Update() {
@@ -30,18 +30,15 @@ public class ChatBubble : MonoBehaviour
 
     IEnumerator UpdateText()
     {  
-        Setup("Once upon a time, in a land far away from here.");
+        Setup("Are you ok?");
         yield return new WaitForSeconds(2f);
-        Setup("There was a small jelly bean named Strabulli");
+        Setup("That clown Tometi really did a number on you.");
         yield return new WaitForSeconds(2f);
-        Setup("He was enjoying life and drinking from a lemonade stand");
+        Setup("That coward is hiding out at the end of the circus.");
         yield return new WaitForSeconds(2.5f);
-        Setup("All of a sudden, he was attacked by an evil tomato named Tometi who was promoting his brand of tomato juice");
+        Setup("Why don't you go get him and teach him a lesson he'll never forget.");
         yield return new WaitForSeconds(5f);
-        Setup("In his darkest moment, Strabulli met a wise mentor in the form of a rat");
-        yield return new WaitForSeconds(4f);
-        Setup("He was encouraged to get revenge, and thus began this epic adventure");
-        yield return new WaitForSeconds(2f);
+        
 
     }
 

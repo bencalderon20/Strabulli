@@ -16865,7 +16865,7 @@ MonoBehaviour:
   speed: 2.5
   duration: 0
   flashMaterial: {fileID: 2100000, guid: c792090d4ccb95b4791300349ed35c71, type: 2}
-  health: 10
+  health: 5000
   selectSound: {fileID: 3720796312265195103}
   rightEdge: {fileID: 3720796311578445572}
   leftEdge: {fileID: 3720796311913911681}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClownMech : MonoBehaviour
 {
@@ -233,5 +234,6 @@ public class ClownMech : MonoBehaviour
         yield return new WaitForSeconds(2);
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

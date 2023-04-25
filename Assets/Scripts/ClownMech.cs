@@ -196,6 +196,7 @@ public class ClownMech : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        speed = 0;
         Debug.Log(health);
         if (health <= 0)
         {

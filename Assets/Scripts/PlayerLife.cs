@@ -88,6 +88,7 @@ public class PlayerLife : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("colliderDisabler"))
         {
+            TakeDamage(0, collision.transform);
             hitCounter = hitCounter+1;
             if (hitCounter == 3)
             {

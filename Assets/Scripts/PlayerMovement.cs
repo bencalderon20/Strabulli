@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float timer = Mathf.Infinity;
     private float timer2 = Mathf.Infinity;
     public float timer3 = Mathf.Infinity;
+    public float timer4 = 0;
     private int brick = 0;
 
     [SerializeField] private LayerMask jumpableGround;
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Brick;
     private bool BrickGround;
     private int item;
+    private int attack;
     [SerializeField] private AudioSource shootSFX;
 
     private GameObject[] BrickList;
@@ -50,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         BrickList = new GameObject[5];
+        attack = anim.GetInteger("power");
     }
 
     // Update is called once per frame
@@ -59,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
         if(timer3 > 0.3f) {
             rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
         }
-        
         BrickGround = Brick.GetComponent<Block>().IsGrounded();
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -71,20 +73,26 @@ public class PlayerMovement : MonoBehaviour
         //    }
 
         UpdateAnimationState();
-        if (timer > 10)
+        //Various timers for the attacks
+        if (timer > 10) //This will reset the player's animation to idle if they haven't attack
         {
             anim.SetInteger("power", 0);
         }
-        if (timer2 > 1)
+        if (attack == 3) //This will run the cooldown for the spinach
+        {
+            timer2 += Time.deltaTime;
+        }
+        if (timer2 > 1 && dashing) //This will prevent the player from dashing repeatly
         {
             dashing = false;
+            timer2 = 0;
+        }
+        if (brick >= 5) //This will run a cooldown time if there's more than five brick have launched
+        {
+            timer4 += Time.deltaTime;
         }
         timer += Time.deltaTime;
-        timer2 += Time.deltaTime;
         timer3 += Time.deltaTime;
-
-
-        
     }
 
     private void ShootLaser()
@@ -96,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         timer2 = 0;
         dashX = dirX;
         dashing = true;
+        anim.SetInteger("power", 3);
         //rb.velocity = new Vector2(dirX * dashSpeed, 0);
         if (timer2 < 0.3 && dashing == true)
         {
@@ -122,17 +131,22 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.B))
         {
             anim.SetInteger("power", 2);
-            if (!BrickGround)
+            if (!BrickGround&&brick<5)
             {
                 ShootBrick();
                 brick++;
             }
+                if(timer4>20)
+                {
+                    brick = 0;
+                    timer4 = 0;
+                }
         }
         else if(Input.GetKeyDown(KeyCode.V) && IsGrounded() && timer2 > 1.2)
         {
-            anim.SetInteger("power", 3);
             SpinachPunch();
         }
+        attack = anim.GetInteger("power");
     }
 
     //pauses game

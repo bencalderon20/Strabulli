@@ -85,7 +85,6 @@ public class ClownMech : MonoBehaviour
                     currentPoint = rightEdge.transform;
                 }
                 timer += Time.deltaTime;
-                Debug.Log(timer);
                 if (timer >= 5)
                 {
                     anim.SetBool("Selecting", true);

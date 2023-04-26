@@ -22,7 +22,6 @@ public class EnemyBullet : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
-        oldsped = rb.velocity;
         if (rotate == true)
         {
             float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
@@ -55,17 +54,18 @@ public class EnemyBullet : MonoBehaviour
                 case 1:
                     Destroy(gameObject);
                     break;
-
             }
         }
     }
-    /*private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter2D (Collision2D collision)
     {
-        if(stay && other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        oldsped = rb.velocity;
+        if(stay && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Vector3 Direction = Vector3.Reflect(oldsped.normalized, collision.contacts[0].normal);
-            rb.velocity = Direction * Mathf.Max(oldsped.magnitude, 0);
-            Debug.Log()
+            if(oldsped.x<0)
+                rb.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+            else
+                rb.AddForce(Vector2.left * force, ForceMode2D.Impulse);
         }
     }*/
     void OnBecomeInvisible()

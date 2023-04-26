@@ -1002,7 +1002,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 347937000}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1028,7 +1028,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 347937000}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -3204,7 +3204,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 996825904}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -3230,7 +3230,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 996825904}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -4438,7 +4438,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1502081315}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -4464,7 +4464,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1502081315}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -70405,7 +70405,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2109745633}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -70431,7 +70431,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2109745633}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5688b114372edaf40a8d1c2a64a3d28a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -71493,7 +71493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5663192098190158109}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 16.128754, y: 4.74, z: 1.4293594}
+  m_LocalPosition: {x: 16.128754, y: 5.91, z: 1.4293594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71585,7 +71585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 5663192097124124330}
-  spikeBall: {fileID: 8363118732766099428, guid: 248df79c4bc0cce419949a02c917b67c, type: 3}
+  spikeBall: {fileID: 8363118732766099428, guid: 1c65fbb749279404992c58cd9d94c0e4, type: 3}
   startTimeBetween: 2
 --- !u!114 &5665268047941135288
 MonoBehaviour:
@@ -72018,6 +72018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6438073739cb1274ea3b96563b1b94c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer3: Infinity
   jumpableGround:
     serializedVersion: 2
     m_Bits: 64

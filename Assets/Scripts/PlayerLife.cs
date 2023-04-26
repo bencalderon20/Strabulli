@@ -92,7 +92,14 @@ public class PlayerLife : MonoBehaviour
             hitCounter = hitCounter+1;
             if (hitCounter == 3)
             {
-                StartCoroutine(colliderDisabling());
+                if(SceneManager.GetActiveScene().buildIndex == 2)
+                {
+
+                }
+                else
+                {
+                    StartCoroutine(colliderDisabling());
+                }  
             }
         }
     }

@@ -210,7 +210,6 @@ public class ClownMech : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        speed = 0;
         Debug.Log(health);
         if (health <= 0)
         {
@@ -249,6 +248,7 @@ public class ClownMech : MonoBehaviour
     IEnumerator Die()
     {
         Debug.Log("Super Ded");
+        speed = 0;
         //deathSFX.Play();
         anim.SetTrigger("death");
         coll.enabled = !coll.enabled;

@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 228, y: 7}
+  m_AnchoredPosition: {x: 339, y: 23}
   m_SizeDelta: {x: 183.9514, y: 51.263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7886268
@@ -551,7 +551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &905441056
 RectTransform:
   m_ObjectHideFlags: 0
@@ -569,7 +569,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000022888, y: 48}
+  m_AnchoredPosition: {x: -101, y: 48}
   m_SizeDelta: {x: 646.2925, y: 251.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905441057
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You've Conquered The Circus De Tonto
+  m_text: The End
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b46f2653e9906b84fb651c79da41a206, type: 2}
   m_sharedMaterial: {fileID: -6093787255479176461, guid: b46f2653e9906b84fb651c79da41a206, type: 2}
@@ -904,7 +904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -173, y: 7}
+  m_AnchoredPosition: {x: 339, y: 97}
   m_SizeDelta: {x: 183.9514, y: 51.263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1487348246

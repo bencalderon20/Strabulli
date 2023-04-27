@@ -87,11 +87,10 @@ public class PlayerMovement : MonoBehaviour
             dashing = false;
             timer2 = 0;
         }
-        //if (brick >= 1) //This will run a cooldown time if there's more than one brick have launched
-       // {
-            
-        //}
-        timer4 += Time.deltaTime;
+        if (brick >= 1) //This will run a cooldown time if there's more than one brick have launched
+        {
+            timer4 += Time.deltaTime;
+        }
         timer += Time.deltaTime;
         timer3 += Time.deltaTime;
     }
@@ -132,13 +131,16 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.B))
         {
             anim.SetInteger("power", 2);
-            if (timer4>1)
+            if (!BrickGround&&brick<1)
             {
                 ShootBrick();
                 brick++;
-                timer4 = 0;
             }
-                
+                if(timer4>1)
+                {
+                    brick = 0;
+                    timer4 = 0;
+                }
         }
         else if(Input.GetKeyDown(KeyCode.V) && IsGrounded() && timer2 > 1.2)
         {

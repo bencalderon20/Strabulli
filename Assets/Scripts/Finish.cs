@@ -30,8 +30,10 @@ public class Finish : MonoBehaviour
 
     private void CompleteLevel()
     {
+        if(SceneManager.GetActiveScene().buildIndex == 3) {
         music = GameObject.FindGameObjectsWithTag("GameMusic");
         Destroy(music[0]);
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

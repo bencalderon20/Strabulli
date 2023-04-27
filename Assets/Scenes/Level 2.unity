@@ -72019,6 +72019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer3: Infinity
+  timer4: 0
   jumpableGround:
     serializedVersion: 2
     m_Bits: 64

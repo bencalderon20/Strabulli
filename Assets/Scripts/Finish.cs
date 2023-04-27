@@ -7,7 +7,7 @@ public class Finish : MonoBehaviour
 {
     [SerializeField] private AudioSource finishSound;
 
-
+    private GameObject[] music;
     // Start is called before the first frame update
     private void Start()
     {
@@ -30,6 +30,8 @@ public class Finish : MonoBehaviour
 
     private void CompleteLevel()
     {
+        music = GameObject.FindGameObjectsWithTag("GameMusic");
+        Destroy(music[0]);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

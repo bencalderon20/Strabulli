@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             dashing = false;
             timer2 = 0;
         }
-        if (brick >= 5) //This will run a cooldown time if there's more than five brick have launched
+        if (brick >= 1) //This will run a cooldown time if there's more than one brick have launched
         {
             timer4 += Time.deltaTime;
         }
@@ -131,12 +131,12 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.B))
         {
             anim.SetInteger("power", 2);
-            if (!BrickGround&&brick<5)
+            if (!BrickGround&&brick<1)
             {
                 ShootBrick();
                 brick++;
             }
-                if(timer4>20)
+                if(timer4>1)
                 {
                     brick = 0;
                     timer4 = 0;
